@@ -1,0 +1,27 @@
+﻿Target,Competitors,Collaborators
+Toyota,"Daimler, BMW, Ford, Honda, Nissan, Tesla, Volkswagen, Hyundai, General Motor, Peugeot, Renault, SAIC, Geely, Audi","Toyota Industries, JTEKT, Toyota Tsusho, Aisin Seiki, Toyoda Gosei, DENSO, Toyota Boshoku, Isuzu, Yamaha Motor Corporation, Panasonic"
+General Motor,"Volkswagen, Hyundai, Ford, Nissan, Honda, Peugeot, Suzuki, Renault, Fiat, Daimler, BMW, SAIC, Tata, Toyota","NGK Spark Plug, Mold Masters, Bosch, Mitsubishi Electric"
+Volkswagen,"Toyota, Hyundai, Ford, Nissan, Honda, Renault, Daimler, BMW, Tata, Subaru, Kia, Suzuki, General Motor ","Audi, Porsche, Ford, Microsoft"
+Hyundai,"Toyota, Volkswagen, General Motor, Ford, Nissan, Honda, Fiat, Renault, Geely, Peugeot, Mazda, Suzuki, Tata ","IHS Automotive, Audi"
+Daimler,"BMW, Volkswagen, Toyota, Ferrari, Ford, Tata, Geely, General Motor, Fiat, Tesla, Audi, Porsche","Thyssenkrupp, Eagle Ottawa, Inteva Products, Carcoustics, Nemak, Johnson Electric, ZF Lenksysteme"
+BMW,"Volkswagen, Daimler, Tata, Geely, Toyota, Volkswagen, Honda, Hyundai, Fiat, Audi, Porsche","Brembo, Thyssenkrupp, BorgWarner, Elringklinger, Bridgestone, Mahle"
+Ford,"General Motor, Toyota, Tata, Daimler, Hyundai, Honda, Tesla, Volkswagen, Renault, Fiat, Nissan, Peugeot, Geely, Suzuki ","Flex-N-Gate Seeburn, NHK Spring, Valeo Electric and Electronic Systems"
+Honda,"Ford, Daimler, BMW, Toyota, Hyundai, Volkswagen, Nissan, Fiat, Mitsubishi Motor, Suzuki, Tata ","General Motor, Isuzu"
+Nissan,"Honda, Toyota, Volkswagen, Mitsubishi Motor",Renault
+Tesla,"Ford, General Motor, Honda, Hyundai, Nissan, Volkswagen, Kia, Toyota, Tata, BMW, Kandi Technologies, Navistar, Oshkosh, Paccar, Spartan, Wabco","AGC Automotive, Brembo, Fisher Dynamics, Inteva Products, Modine Manufacturing, Sika, Stabilus, ZF Lenksysteme"
+Suzuki,"Honda, Toyota, Nissan, Hyundai, Fiat, Mitsubishi Motor, Volkswagen, Tata, Ford, Geely",Toyota
+Peugeot,"Honda, Toyota, Ford, Nissan, Volkswagen, Hyundai, General Motor, Fiat",Mitsubishi Motor
+Renault,"Hyundai, Volkswagen, Ford, Honda, Nissan, Toyota, Suzuki, Tata",Nissan 
+SAIC,"Nissan, Hyundai, Honda, Toyota, Volkswagen, Ford, Mazda, Daimler, Geely",General Motor 
+Geely,"Honda, Toyota, Ford, Nissan, Volkswagen, Tata, General Motor, Hyundai, Fiat, SAIC","Shell, Daimler"
+Audi,"BMW, Daimler, Tata, Porsche, Aston Martin, Ferrari, Toyota, Geely, Hyundai, Honda, Ford, General Motor, Nissan","Alibaba, Baidu, Tencent"
+Toyota Industries,"Kion Group, Whiting, Godrej Consumer Products, Unilever, P&G, Sisscohoist, Engliftsystems, L'Oreal, S.C. Johnson","DENSO, Mazda"
+JTEKT,"Hoover Precision Products, NSK, TimKen, SKF, Nbc Bearings, Schaeffler, Minebea, NTN",Toyota
+Toyota Tsusho,"Mitsubishi Corp, ITOCHU, Marubeni, Sumitomo, Sojitz, SITM",CFAO
+Aisin Seiki,"Valeo, Delphi, Bosch, GETRAG, Calsonic kansei, Keihin, DENSO, Nathan, Johnson Controls",Toyota
+Toyoda Gosei,"Delphi, Valeo, Magneti Marelli, Johnson Controls, Bosch, ZF TRW, Honeywell, Takata, Lear",Toyota
+DENSO,"Delphi, Valeo, Honeywell, Johnson Controls, Bosch, Makita, United Technologies, Harman Embedded Audio, ZF TRW, Siemens",Toyota Industries
+Toyota Boshoku,"Siemens, Honeywell, Johnson Controls, Magna, Faurecia, Adient, Grupo Antolin, Benteler, SRG Global, Lear",Toyota
+Isuzu,"Paccar, Volkswagen, Navistar, Ford, Oshkosh, Scania, Daimler, Cummins",Honda
+Yamaha Motor Corporation,"Honda, Hero, Toyota, Nissan, Ford, Volkswagen, Suzuki, Hyundai, Bajaj Auto, TVS",NVIDIA
+Panasonic,"Sony, OSRAM, Nikon, HTC, BenQ, Philips, Samsung, Microsoft, HUAWEI, DELL",Tesla
