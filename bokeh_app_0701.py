@@ -431,9 +431,9 @@ source_mcgg = ColumnDataSource(data={"date": cds_mcgg.data['Date'],
                                      "y2": cds_mcgg.data["tar_NAM_econ_pessi"],
                                      "Bottom": cds_mcgg.data["Bottom"]})
 
-df_label_begin_optim = pd.read_csv('tyt_NAM_econ_label.csv')
+df_label_begin_optim = pd.read_csv('label.csv')
 df_label_begin_optim["Date"] = pd.to_datetime(df_label_begin_optim["Date"]).apply(dt.datetime.date)
-df_label_begin_pessi = pd.read_csv('tyt_NAM_econ_pessi_label.csv')
+df_label_begin_pessi = pd.read_csv('pessi_label.csv')
 df_label_begin_pessi["Date"] = pd.to_datetime(df_label_begin_pessi["Date"]).apply(dt.datetime.date)
 
 cds_label_optim = ColumnDataSource(data={"date":df_label_begin_optim["Date"],
