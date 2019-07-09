@@ -139,7 +139,7 @@ It tracks more than 25,000 equities and nearly 40 commodities and energy topics.
 In the figure below, you will see:1) the main news provider; 2) the most-frequently reported topics; 3) the most-frequently reported regions in TRNA, and also for Toyota-related news.
 </p>
 ''',
-width = 1200, height = 120)
+width = 1400, height = 120)
 
 
 control_trna=row([multi_select_scope,multi_select_indicator])
@@ -180,7 +180,7 @@ for u in list(G.nodes()):
     com_str = ''
     col_str = ''
     mkt_cap = round(df_mktcap[df_mktcap.Company == u]['MarketCapUSDollar']/1000,2)
-    size = mkt_cap/2000
+    size = mkt_cap/2
     for v in list(G.neighbors(u)):
         if G.edges[u, v]['level'] == 'com':
             if com_str == '':
@@ -232,8 +232,8 @@ nx_renderer.edge_renderer.data_source = edge_source
 nx_renderer.edge_renderer.view = CDSView(source=edge_source)
 
 # generate graphs
-nx = Plot(plot_width=1200, plot_height=800,
-            x_range=Range1d(-1.1,1.1), y_range=Range1d(-1.1,1.1))
+nx = Plot(plot_width=1400, plot_height=800,
+            x_range=Range1d(-1.2,1.2), y_range=Range1d(-1.2,1.2))
 nx.title.text = "Competitive and Collaborative Network for Toyota"
 nx.add_tools(TapTool(),BoxZoomTool(), ResetTool())
 nx_renderer.node_renderer.glyph = Circle(size='size', fill_color=Blues4[2], line_color = Blues4[2], line_width = 0.5)
@@ -274,12 +274,12 @@ note_nx =  Div(text='''
 <b>Notes:</b>
 
 <p>
-The GFI data for <b>Toyota, BMW, Daimler, Ford, General Motor, Tesla</b> has been pre-loaded for test.
-Simply tap on the circle (the selected circle will turn dark blue), and the corresponding GFIs can be accessed in the GFI generator below.
-GFIs for other companies are currently un-avaiable.
+The GRI data for <b>Toyota, BMW, Daimler, Ford, General Motor, Tesla</b> has been pre-loaded for test.
+Simply tap on the circle (the selected circle will turn dark blue), and the corresponding GRIs can be accessed in the GRI generator below.
+GRIs for other companies are currently un-avaiable.
 </p>
 
-''', width=1200)
+''', width=1400)
 
 pre_nx = Div(text=
                '''
@@ -290,7 +290,7 @@ pre_nx = Div(text=
                </p>
 
                ''',
-               width=1200)
+               width=1400)
 
 layout_nx= column(pre_nx, nx, note_nx)
 
@@ -335,11 +335,11 @@ def create_figure_mcgg(cds_main_mcgg,cds_label_optim,cds_label_pessi):
 
     # style backgound
     mcgg.height = 600
-    mcgg.width = 1200
+    mcgg.width = 1400
 
     # style Axes
     mcgg.xaxis.axis_label = 'Date'
-    mcgg.yaxis.axis_label = 'GFI'
+    mcgg.yaxis.axis_label = 'GRI'
 
     # style title
     mcgg.title.text = "News Sentiment Index"
@@ -410,7 +410,7 @@ multi_select_level_mcgg = MultiSelect(title="Select level",
                                       options=[("tar_", "Target Company"),
                                                ("com_", "Competitors"),
                                                ("col_", "Collaborators")],
-                                      width=290,
+                                      width=300,
                                       height=130)
 
 multi_select_region_mcgg = MultiSelect(title="Select region",
@@ -420,7 +420,7 @@ multi_select_region_mcgg = MultiSelect(title="Select region",
                                                 ("EA_", "East Asia"),
                                                 ("JP_", "Japan"),
                                                 ("ME_", "Middle East")],
-                                       width=290,
+                                       width=300,
                                        height=130)
 
 multi_select_risk_mcgg = MultiSelect(title="Select risk factor",
@@ -429,17 +429,17 @@ multi_select_risk_mcgg = MultiSelect(title="Select risk factor",
                                               ("pol", "Political"),
                                               ("dis", "Natural disasters and accidents"),
                                               ("cyb", "Cyber Risk")],
-                                     width=290,
+                                     width=300,
                                      height=130)
 
 datasource_radiogroup_mcgg = RadioGroup(
-        labels=['Scaled (GFIs are scaled to interval(-1,1))',
-                'Unscalde (GFIs are presented in the original aggregated news sentiment scores)'],
+        labels=['Scaled',
+                'Unscalde'],
         active=0)
 
-slider_num_label_mcgg = Slider(title="Number of major events to show for each GFI", value=5, start=1, end=30, step=1)
+slider_num_label_mcgg = Slider(title="Number of major events to show for each GRI", value=5, start=1, end=30, step=1)
 
-button_mcgg = Button(label='Generator sentiment indicators', width=1200)
+button_mcgg = Button(label='Generator sentiment indicators', width=1400)
 
 cds_main_mcgg = ColumnDataSource(data={"date": cds_mcgg.data['Date'],
                                      "y1": cds_mcgg.data["tar_NAM_econ"],
@@ -501,7 +501,7 @@ def update_mcgg():
 
 
 
-    layout_mcgg.children[2] = create_figure_mcgg(cds_main_mcgg=cds_main_mcgg,
+    layout_mcgg.children[1] = create_figure_mcgg(cds_main_mcgg=cds_main_mcgg,
                                                  cds_label_optim=cds_label_optim,
                                                  cds_label_pessi=cds_label_pessi)
 
@@ -512,25 +512,25 @@ button_mcgg.on_click(update_mcgg)
 
 pre_mcgg = Div(text=
                '''
-               <h2> GFIs Generator </h2>
+               <h2> GRIs Generator </h2>
                <p>
-               In the figure below, you can generate the optimistic and pessimistic GFIs for the company you selected in the network (companies listed after 2012 or non-listed companies are not available).
+               In the figure below, you can generate the optimistic and pessimistic GRIs for the company you selected in the network (companies listed after 2012 or non-listed companies are not available).
                </p>
                <p>
-               Multi-select is enabled (i.e. more than one level/region/risk factors can be selected). When multiple GFIs are selected, the GFI generator will show the sum of all GFIs.
+               Multi-select is enabled (i.e. more than one level/region/risk factors can be selected). When multiple GRIs are selected, the GRI generator will show the sum of all GRIs.
                </p>
                <p>
-               GFIs can be presented in a scaled format, or in its original format.
-               N.B.For both format, multi-select is allowed, but the sum of scaled GFIs can be difficult to intepret.
+               GRIs can be presented in a scaled format where GRIs are scaled to the interval of [-1,1]; or in its original format, which is the aggregated news sentiment scores.
+               N.B.For both format, multi-select is allowed, but the sum of scaled GRIs can be difficult to intepret.
                </p>
                <p>
-               The slider is used for controlling the number of major events to show for each GFI.
+               The slider is used for controlling the number of major events to show for each GRI.
                </p>
-               You can also click on the legend to mute the corresponding GFI.
+               You can also click on the legend to mute the corresponding GRI.
                </p>
 
                ''',
-               width=1200)
+               width=1400)
 
 pre_all = Div(text='''
 <p>
@@ -538,24 +538,23 @@ pre_all = Div(text='''
 </p>
 <p>
 <b>
-In this page, a method to construct geo-risk factor indicators (GFIs) by using publicly available information – news is presented. GFIs can capture various risk types in different regions faced by individual companies comprehensively. GFIs can be employed by companies to measure their own risk exposures and to support the business operational and strategical decision-making, or be adopted by other stakeholders to capture the risks faced by the company and make predictions about the company’s performance in the market and communities.
+In this page, a method to construct geo-risk factor indicators (GRIs) by using publicly available information – news is presented. GRIs can capture various risk types in different regions faced by individual companies comprehensively. GRIs can be employed by companies to measure their own risk exposures and to support the business operational and strategical decision-making, or be adopted by other stakeholders to capture the risks faced by the company and make predictions about the company’s performance in the market and communities.
 </p>
 <p>
-Toyota Motor Corporation is chosen as an example to demonstrate the implication of GFIs, since the business operation of this company is spread globally, the need for developing an integrated risk measurement system can be urgent.
+Toyota Motor Corporation is chosen as an example to demonstrate the implication of GRIs, since the business operation of this company is spread globally, the need for developing an integrated risk measurement system can be urgent.
 <p>
-You will first see a brief summary about the news data used to construct GFIs, then a competitor-and-collaborator network for Toyota, you can then select the company from the network graph and see corresponding GFIs in the generator at the end of this page.
+You will first see a brief summary about the news data used to construct GRIs, then a competitor-and-collaborator network for Toyota, you can then select the company from the network graph and see corresponding GRIs in the generator at the end of this page.
 </p>
 </b>
-</p>''', width=1200)
+</p>''', width=1400)
 
 
 
-control_mcgg = [multi_select_level_mcgg, multi_select_region_mcgg, multi_select_risk_mcgg, slider_num_label_mcgg]
+control_mcgg = [multi_select_level_mcgg, multi_select_region_mcgg, multi_select_risk_mcgg, column(slider_num_label_mcgg, datasource_radiogroup_mcgg)]
 
 
 layout_mcgg = column(
     [pre_mcgg,
-     datasource_radiogroup_mcgg,
      create_figure_mcgg(cds_main_mcgg=cds_main_mcgg,
                         cds_label_optim=cds_label_optim,
                         cds_label_pessi=cds_label_pessi),
