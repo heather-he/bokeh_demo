@@ -6,7 +6,7 @@ import numpy as np
 import datetime as dt
 from scipy.stats import spearmanr
 
-from bokeh.models import Plot, Range1d, MultiLine, Circle, HoverTool, TapTool, BoxSelectTool, ResetTool, BoxZoomTool, LabelSet, CDSView, ColumnDataSource, PanTool, Legend
+from bokeh.models import Plot, Range1d, MultiLine, Circle, HoverTool, TapTool, BoxSelectTool, ResetTool, BoxZoomTool, LabelSet, CDSView, ColumnDataSource, PanTool, Legend, Slider, RadioGroup
 from bokeh.models.graphs import from_networkx, NodesAndLinkedEdges, EdgesAndLinkedNodes
 from bokeh.palettes import Blues4
 from bokeh.plotting import figure
@@ -148,14 +148,15 @@ layout_trna = column([pre_trna,control_trna,button,create_figure_trna()])
 #################################################################################
 #################################################################################
 
-df = pd.read_csv('CC_Network_Toyota.csv')
+df_nx = pd.read_csv('SimpleNX_raw.csv')
+df_mktcap = pd.read_csv('SimpleNX_MktCap.csv')
 
 dict_edgess = {}
 dict_edgess['start'] = []
 dict_edgess['stop'] = []
 dict_edgess['level'] = []
 dict_edgess['color'] = []
-for key,label in df.iterrows():
+for key,label in df_nx.iterrows():
     node1 = label['Target']
     for com in label['Competitors'].split(', '):
         node2 = com
@@ -176,20 +177,23 @@ G = nx.convert_matrix.from_pandas_edgelist(df_edges,source='start',target='stop'
 # add attributes (coms/cols to nodes)
 node_attr = dict()
 for u in list(G.nodes()):
-    com_str=''
-    col_str=''
+    com_str = ''
+    col_str = ''
+    mkt_cap = round(df_mktcap[df_mktcap.Company == u]['MarketCapUSDollar']/1000,2)
+    size = mkt_cap/2000
     for v in list(G.neighbors(u)):
         if G.edges[u, v]['level'] == 'com':
-            if com_str=='':
-                com_str=v
+            if com_str == '':
+                com_str = v
             else:
-                com_str=com_str+', '+v
+                com_str = com_str+', '+v
         else:
-            if col_str=='':
-                col_str=v
+            if col_str == '':
+                col_str = v
             else:
-                col_str=col_str+', '+v
-    node_attr[u] = {'competitors':com_str, 'collaborators': col_str}
+                col_str = col_str+', '+v
+    node_attr[u] = {'competitors':com_str, 'collaborators': col_str,'marketcap':mkt_cap,'size':size}
+
 nx.set_node_attributes(G,node_attr)
 
 nx_renderer = from_networkx(G, nx.kamada_kawai_layout)
@@ -232,14 +236,15 @@ nx = Plot(plot_width=1200, plot_height=800,
             x_range=Range1d(-1.1,1.1), y_range=Range1d(-1.1,1.1))
 nx.title.text = "Competitive and Collaborative Network for Toyota"
 nx.add_tools(TapTool(),BoxZoomTool(), ResetTool())
-nx_renderer.node_renderer.glyph = Circle(size=15, fill_color=Blues4[2], line_color = Blues4[2], line_width = 0.5)
-nx_renderer.node_renderer.selection_glyph = Circle(size=10, fill_color=Blues4[0], line_color = Blues4[0])
+nx_renderer.node_renderer.glyph = Circle(size='size', fill_color=Blues4[2], line_color = Blues4[2], line_width = 0.5)
+
+nx_renderer.node_renderer.selection_glyph = Circle(size=15, fill_color=Blues4[0], line_color = Blues4[0])
 nx_renderer.node_renderer.hover_glyph = Circle(size=10, fill_color=Blues4[0])
 
 nx_renderer.edge_renderer.glyph = MultiLine(line_color="color", line_alpha=0.3, line_width=1)
 
 
-TOOLTIPS = """
+nx_tooltips = """
 <div>
     <div>
     <span style="font-size: 10px">Competitors:@competitors</span>
@@ -247,9 +252,12 @@ TOOLTIPS = """
     <div>
     <span style="font-size: 10px">Collaborators: @collaborators</span>
     </div>
+    <div>
+    <span style="font-size: 10px">Market Capitalization (Bililion$): @marketcap</span>
+    </div>
 </div>
 """
-node_hover = HoverTool(tooltips=TOOLTIPS)
+node_hover = HoverTool(tooltips=nx_tooltips)
 nx.add_tools(node_hover)
 
 x, y = zip(*nx_renderer.layout_provider.graph_layout.values())
@@ -287,12 +295,8 @@ pre_nx = Div(text=
 layout_nx= column(pre_nx, nx, note_nx)
 
 
-
-
 #################################################################################
 #################################################################################
-
-
 df_mcgg = pd.read_csv('Toyota.csv')
 df_mcgg['Date'] = pd.to_datetime(df_mcgg['Date']).apply(dt.datetime.date)
 cds_mcgg = ColumnDataSource(df_mcgg)
@@ -301,22 +305,28 @@ taptool = nx.select(type=TapTool)
 
 def update_cds_mcgg():
     selected_index = nx_renderer.node_renderer.data_source.selected.indices
-    selected = list(G.nodes())[selected_index[0]]
-    url = '{}.csv'.format(selected)
+    try:
+        selected = list(G.nodes())[selected_index[0]]
+    except:
+        selected = 'Toyota'
+    if datasource_radiogroup_mcgg.active == 0:
+        url = '{}.csv'.format(selected)
+    elif datasource_radiogroup_mcgg.active == 1:
+        url = '{}_unscaled.csv'.format(selected)
+
     df_mcgg = pd.read_csv(url)
     df_mcgg['Date'] = df_mcgg['Date'].astype('str')
     cds_mcgg.data = {col: np.array(df_mcgg[col]) for col in df_mcgg.columns}
     dd = [dt.datetime.strptime(d, '%Y-%m-%d') for d in cds_mcgg.data['Date']]
     cds_mcgg.data['Date'] = np.array([dt.datetime.date(d) for d in dd])
 
-nx.on_event(Tap, update_cds_mcgg)
+# nx.on_event(Tap, update_cds_mcgg)
 
-def create_figure_mcgg(source_mcgg,cds_label_optim,cds_label_pessi):
-
+def create_figure_mcgg(cds_main_mcgg,cds_label_optim,cds_label_pessi):
 
     kw = dict()
 
-    kw['y_range'] = Range1d(start=min(source_mcgg.data["y2"])-0.5, end=max(source_mcgg.data["y1"])+0.5)
+    kw['y_range'] = Range1d(start=min(cds_main_mcgg.data["y2"])-0.5, end=max(cds_main_mcgg.data["y1"])+0.5)
     kw['x_axis_type'] = 'datetime'
     mcgg = figure(**kw)
 
@@ -345,21 +355,20 @@ def create_figure_mcgg(source_mcgg,cds_label_optim,cds_label_pessi):
     mcgg.varea(x="date", y1='Bottom', y2="y1",
                fill_color='red', fill_alpha=0.1,
                legend='optimistic index',
-               source=source_mcgg)
+               source=cds_main_mcgg)
     mcgg.varea(x="date", y1='Bottom', y2="y2",
                fill_color='green', fill_alpha=0.1,
                legend='pessimistic index',
-               source=source_mcgg)
+               source=cds_main_mcgg)
 
     mcgg.line(x="date", y="y1",
               line_color='red', line_alpha=0.8,
               legend='optimistic index',
-              source=source_mcgg)
+              source=cds_main_mcgg)
     mcgg.line(x="date", y="y2",
               line_color='green', line_alpha=0.8,
               legend='pessimistic index',
-              source=source_mcgg)
-
+              source=cds_main_mcgg)
 
 
     mcgg.circle(x="date", y="y1", size=6, color='red',
@@ -368,19 +377,19 @@ def create_figure_mcgg(source_mcgg,cds_label_optim,cds_label_pessi):
     mcgg.circle(x="date", y="y2", size=6, color='green',
                 source=cds_label_pessi)
 
-    labels_optim = LabelSet(x='date', y="y1", text='label', source=cds_label_optim,
+    labels_optim = LabelSet(x='date', y="y1", text='label_optim', source=cds_label_optim,
                             render_mode='css',
                             text_font_size='10px',
                             border_line_color='black', border_line_alpha=0.8,
                             background_fill_color='white', background_fill_alpha=0.7)
-    labels_pessi = LabelSet(x='date', y="y2", text='label', source=cds_label_pessi,
+    labels_pessi = LabelSet(x='date', y="y2", text='label_pessi', source=cds_label_pessi,
                             render_mode='css',
                             text_font_size='10px',
                             border_line_color='black', border_line_alpha=0.8,
                             background_fill_color='white', background_fill_alpha=0.7)
 
     mcgg.legend.location = "top_right"
-    mcgg.legend.click_policy="mute"
+    mcgg.legend.click_policy="hide"
 
     mcgg.add_layout(labels_optim)
     mcgg.add_layout(labels_pessi)
@@ -395,12 +404,12 @@ hover = HoverTool(tooltips=[("Date", "@date{%F}"),
                   formatters={"date": "datetime"})
 
 
+
 multi_select_level_mcgg = MultiSelect(title="Select level",
                                       value=["tar_"],
                                       options=[("tar_", "Target Company"),
                                                ("com_", "Competitors"),
-                                               ("col_", "Collaborators"),
-                                               ("all_", "All Levels")],
+                                               ("col_", "Collaborators")],
                                       width=290,
                                       height=130)
 
@@ -410,8 +419,7 @@ multi_select_region_mcgg = MultiSelect(title="Select region",
                                                 ("EU_", "Europe"),
                                                 ("EA_", "East Asia"),
                                                 ("JP_", "Japan"),
-                                                ("ME_", "Middle East"),
-                                                ('GLO_', 'Global')],
+                                                ("ME_", "Middle East")],
                                        width=290,
                                        height=130)
 
@@ -424,56 +432,100 @@ multi_select_risk_mcgg = MultiSelect(title="Select risk factor",
                                      width=290,
                                      height=130)
 
+datasource_radiogroup_mcgg = RadioGroup(
+        labels=['Scaled (GFIs are scaled to interval(-1,1))',
+                'Unscalde (GFIs are presented in the original aggregated news sentiment scores)'],
+        active=0)
+
+slider_num_label_mcgg = Slider(title="Number of major events to show for each GFI", value=5, start=1, end=30, step=1)
+
 button_mcgg = Button(label='Generator sentiment indicators', width=1200)
 
-source_mcgg = ColumnDataSource(data={"date": cds_mcgg.data['Date'],
+cds_main_mcgg = ColumnDataSource(data={"date": cds_mcgg.data['Date'],
                                      "y1": cds_mcgg.data["tar_NAM_econ"],
                                      "y2": cds_mcgg.data["tar_NAM_econ_pessi"],
                                      "Bottom": cds_mcgg.data["Bottom"]})
 
-df_label_begin_optim = pd.read_csv('label.csv')
+df_label_begin_optim = pd.read_csv('tyt_NAM_econ_label.csv')
 df_label_begin_optim["Date"] = pd.to_datetime(df_label_begin_optim["Date"]).apply(dt.datetime.date)
-df_label_begin_pessi = pd.read_csv('pessi_label.csv')
+df_label_begin_pessi = pd.read_csv('tyt_NAM_econ_pessi_label.csv')
 df_label_begin_pessi["Date"] = pd.to_datetime(df_label_begin_pessi["Date"]).apply(dt.datetime.date)
 
 cds_label_optim = ColumnDataSource(data={"date":df_label_begin_optim["Date"],
                                     "y1":df_label_begin_optim["tar_NAM_econ"],
                                     "y2":df_label_begin_optim["tar_NAM_econ_pessi"],
-                                    "label":df_label_begin_optim["tar_NAM_econ_label"]})
+                                    "label_optim":df_label_begin_optim["tar_NAM_econ_label"]})
 
 cds_label_pessi = ColumnDataSource(data={"date":df_label_begin_pessi["Date"],
                                     "y1":df_label_begin_pessi["tar_NAM_econ"],
                                     "y2":df_label_begin_pessi["tar_NAM_econ_pessi"],
-                                    "label":df_label_begin_pessi["tar_NAM_econ_label"]})
+                                    "label_pessi":df_label_begin_pessi["tar_NAM_econ_label"]})
 
 def update_mcgg():
-    key_optim = multi_select_level_mcgg.value[0] + multi_select_region_mcgg.value[0] + multi_select_risk_mcgg.value[0]
-    key_pessi = key_optim + "_pessi"
-    key_label = key_optim + "_label"
-    source_mcgg.data["y1"] = cds_mcgg.data[key_optim]
-    source_mcgg.data["y2"] = cds_mcgg.data[key_pessi]
 
-    cds_label_optim.data['date'] = [cds_mcgg.data['Date'][i] for i in np.argsort(cds_mcgg.data[key_optim])[-5:]]
-    cds_label_optim.data["y1"] = [cds_mcgg.data[key_optim][i] for i in np.argsort(cds_mcgg.data[key_optim])[-5:]]
-    cds_label_optim.data["y2"] = [cds_mcgg.data[key_pessi][i] for i in np.argsort(cds_mcgg.data[key_optim])[-5:]]
-    cds_label_optim.data["label"] = [cds_mcgg.data[key_label][i] for i in np.argsort(cds_mcgg.data[key_optim])[-5:]]
+    num_label = slider_num_label_mcgg.value
 
-    cds_label_pessi.data['date'] = [cds_mcgg.data['Date'][i] for i in np.argsort(cds_mcgg.data[key_pessi])[:5]]
-    cds_label_pessi.data["y1"] = [cds_mcgg.data[key_optim][i] for i in np.argsort(cds_mcgg.data[key_pessi])[:5]]
-    cds_label_pessi.data["y2"] = [cds_mcgg.data[key_pessi][i] for i in np.argsort(cds_mcgg.data[key_pessi])[:5]]
-    cds_label_pessi.data["label"] = [cds_mcgg.data[key_label][i] for i in np.argsort(cds_mcgg.data[key_pessi])[:5]]
+    cds_main_mcgg.data["y1"] = cds_main_mcgg.data['Bottom']
+    cds_main_mcgg.data["y2"] = cds_main_mcgg.data['Bottom']
 
-    layout_mcgg.children[-3] = create_figure_mcgg(source_mcgg=source_mcgg,
+    optim_label_data = {'date':[],'label_optim':[]}
+    pessi_label_data = {'date':[],'label_pessi':[]}
+
+    for level in multi_select_level_mcgg.value:
+        for region in multi_select_region_mcgg.value:
+            for risk in multi_select_risk_mcgg.value:
+
+                key_optim = level+region+risk
+                key_pessi = key_optim+'_pessi'
+                key_label = key_optim+'_label'
+
+                cds_main_mcgg.data["y1"] = cds_main_mcgg.data["y1"]+cds_mcgg.data[key_optim]
+                cds_main_mcgg.data["y2"] = cds_main_mcgg.data["y2"]+cds_mcgg.data[key_pessi]
+
+                optim_label_data['date'] = optim_label_data['date']+[cds_mcgg.data['Date'][i] for i in np.argsort(cds_mcgg.data[key_optim])[num_label*(-1):]]
+                optim_label_data['label_optim'] = optim_label_data['label_optim']+[cds_mcgg.data[key_label][i] for i in np.argsort(cds_mcgg.data[key_optim])[num_label*(-1):]]
+
+                pessi_label_data['date'] = pessi_label_data['date']+[cds_mcgg.data['Date'][i] for i in np.argsort(cds_mcgg.data[key_pessi])[:num_label]]
+                pessi_label_data['label_pessi'] = pessi_label_data['label_pessi']+[cds_mcgg.data[key_label][i] for i in np.argsort(cds_mcgg.data[key_pessi])[:num_label]]
+
+
+    cds_label_optim.data = {'date':np.array(optim_label_data['date']),
+                            'y1':[cds_main_mcgg.data["y1"][i] for i in [np.where(cds_main_mcgg.data['date']==item)[0][0] for item in optim_label_data['date']]],
+                            'y2':[cds_main_mcgg.data["y2"][i] for i in [np.where(cds_main_mcgg.data['date']==item)[0][0] for item in optim_label_data['date']]],
+                            'label_optim': np.array(optim_label_data["label_optim"])}
+
+    cds_label_pessi.data = {'date':np.array(pessi_label_data['date']),
+                            'y1':[cds_main_mcgg.data["y1"][i] for i in [np.where(cds_main_mcgg.data['date']==item)[0][0] for item in pessi_label_data['date']]],
+                            'y2':[cds_main_mcgg.data["y2"][i] for i in [np.where(cds_main_mcgg.data['date']==item)[0][0] for item in pessi_label_data['date']]],
+                            'label_pessi':np.array(pessi_label_data['label_pessi'])}
+
+
+
+    layout_mcgg.children[2] = create_figure_mcgg(cds_main_mcgg=cds_main_mcgg,
                                                  cds_label_optim=cds_label_optim,
                                                  cds_label_pessi=cds_label_pessi)
 
+button_mcgg.on_click(update_cds_mcgg)
 button_mcgg.on_click(update_mcgg)
+
+
 
 pre_mcgg = Div(text=
                '''
                <h2> GFIs Generator </h2>
                <p>
                In the figure below, you can generate the optimistic and pessimistic GFIs for the company you selected in the network (companies listed after 2012 or non-listed companies are not available).
+               </p>
+               <p>
+               Multi-select is enabled (i.e. more than one level/region/risk factors can be selected). When multiple GFIs are selected, the GFI generator will show the sum of all GFIs.
+               </p>
+               <p>
+               GFIs can be presented in a scaled format, or in its original format.
+               N.B.For both format, multi-select is allowed, but the sum of scaled GFIs can be difficult to intepret.
+               </p>
+               <p>
+               The slider is used for controlling the number of major events to show for each GFI.
+               </p>
                You can also click on the legend to mute the corresponding GFI.
                </p>
 
@@ -493,23 +545,22 @@ Toyota Motor Corporation is chosen as an example to demonstrate the implication 
 <p>
 You will first see a brief summary about the news data used to construct GFIs, then a competitor-and-collaborator network for Toyota, you can then select the company from the network graph and see corresponding GFIs in the generator at the end of this page.
 </p>
-<p>
-At the end of this page, a more flexible GFI generator is provided, through which you can generate the GFIs for the company you are interested in.
-</p>
 </b>
 </p>''', width=1200)
 
 
 
-control_mcgg = row([multi_select_level_mcgg, multi_select_region_mcgg, multi_select_risk_mcgg])
+control_mcgg = [multi_select_level_mcgg, multi_select_region_mcgg, multi_select_risk_mcgg, slider_num_label_mcgg]
+
+
 layout_mcgg = column(
     [pre_mcgg,
-     create_figure_mcgg(source_mcgg=source_mcgg,
+     datasource_radiogroup_mcgg,
+     create_figure_mcgg(cds_main_mcgg=cds_main_mcgg,
                         cds_label_optim=cds_label_optim,
                         cds_label_pessi=cds_label_pessi),
-     control_mcgg,button_mcgg])
+     row(control_mcgg),
+     button_mcgg])
 
-#################################################################################
-#################################################################################
 layout_all = column([pre_all,layout_trna,layout_nx,layout_mcgg])
 curdoc().add_root(layout_all)
