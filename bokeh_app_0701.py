@@ -150,7 +150,7 @@ layout_trna = column([pre_trna,control_trna,button,create_figure_trna()])
 #################################################################################
 
 df_nx = pd.read_csv('TotalNX_raw.csv')
-df_mktcap = pd.read_csv('TotalNX_MktCap.csv')
+df_mktcap = pd.read_csv('TotalNX_mktcap.csv')
 
 dict_edgess = {}
 dict_edgess['start'] = []
