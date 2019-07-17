@@ -1,0 +1,266 @@
+Start,Stop,Link,Width,Level
+Aisin Seiki,Bosch,0,0.0,Competitor
+Aisin Seiki,Calsonic kansei,0,0.0,Competitor
+Aisin Seiki,DENSO,34,2.8803394661274377,Competitor
+Aisin Seiki,Delphi,8,1.8660659830736148,Competitor
+Aisin Seiki,GETRAG,0,0.0,Competitor
+Aisin Seiki,Johnson Controls,13,2.1586538444215795,Competitor
+Aisin Seiki,Keihin,0,0.0,Competitor
+Aisin Seiki,Nathan,0,0.0,Competitor
+Aisin Seiki,Valeo,19,2.4189454814875875,Competitor
+Audi,Alibaba,4,1.515716566510398,Collaborator
+Audi,Aston Martin,4,1.515716566510398,Competitor
+Audi,Baidu,7,1.792789962520997,Collaborator
+Audi,Ferrari,4,1.515716566510398,Competitor
+Audi,Porsche,878,7.639208345346838,Competitor
+Audi,Tata,104,4.028190508306193,Competitor
+Audi,Tencent,4,1.515716566510398,Collaborator
+BMW,Audi,1921,9.661803696225665,Competitor
+BMW,BorgWarner,90,3.8572052822268215,Collaborator
+BMW,Brembo,27,2.6878753795222865,Collaborator
+BMW,Bridgestone,165,4.626421347685183,Collaborator
+BMW,Elringklinger,19,2.4189454814875875,Collaborator
+BMW,FCA,1201,8.391950281995028,Competitor
+BMW,Geely,85,3.791627615651737,Competitor
+BMW,General Motor,2927,10.962934433948194,Competitor
+BMW,Honda,2639,10.627517213377699,Competitor
+BMW,Hyundai,951,7.824456043197678,Competitor
+BMW,Mahle,12,2.107435899344471,Collaborator
+BMW,Porsche,1771,9.428998537103112,Competitor
+BMW,Tata,297,5.518574817074292,Competitor
+BMW,Tesla,164,4.617991768029603,Competitor
+BMW,Thyssenkrupp,116,4.162338506563337,Collaborator
+BMW,Volkswagen,3819,11.873667892654327,Competitor
+DENSO,Bosch,0,0.0,Competitor
+DENSO,Delphi,123,4.236151985630706,Competitor
+DENSO,Harman Embedded Audio,0,0.0,Competitor
+DENSO,Honeywell,50,3.233635032886787,Competitor
+DENSO,Johnson Controls,48,3.194275505495155,Competitor
+DENSO,Makita,0,0.0,Competitor
+DENSO,Siemens,37,2.954340289925338,Competitor
+DENSO,United Technologies,0,0.0,Competitor
+DENSO,Valeo,89,3.8442976132762077,Competitor
+DENSO,ZF TRW,0,0.0,Competitor
+Daimler,Audi,571,6.714146798776599,Competitor
+Daimler,BMW,2210,10.076684988383803,Competitor
+Daimler,Eagle Ottawa,6,1.711769859409705,Collaborator
+Daimler,FCA,742,7.263085749853261,Competitor
+Daimler,Ferrari,6,1.711769859409705,Competitor
+Daimler,Ford,1099,8.171453388018403,Competitor
+Daimler,Geely,33,2.854658634732502,Collaborator
+Daimler,General Motor,1404,8.794479326665492,Competitor
+Daimler,Honda,614,6.8619968023628495,Competitor
+Daimler,Inteva Products,6,1.711769859409705,Collaborator
+Daimler,Isuzu,66,3.5144970301577456,Competitor
+Daimler,Johnson Electric,6,1.711769859409705,Collaborator
+Daimler,Nemak,6,1.711769859409705,Collaborator
+Daimler,Porsche,424,6.140585135560324,Competitor
+Daimler,SAIC,42,3.068843822095698,Competitor
+Daimler,Tata,286,5.456445351652516,Competitor
+Daimler,Tesla,256,5.278031643091577,Competitor
+Daimler,Thyssenkrupp,104,4.028190508306193,Collaborator
+Daimler,Volkswagen,1986,9.758740582119598,Competitor
+Daimler,ZF Lenksysteme,6,1.711769859409705,Collaborator
+Ford,Audi,1041,8.039614389892176,Competitor
+Ford,FCA,3047,11.09587961663363,Competitor
+Ford,Geely,181,4.7566760209420424,Competitor
+Ford,General Motor,11191,16.393084168453125,Competitor
+Ford,Honda,6057,13.635694799990336,Competitor
+Ford,Hyundai,2353,10.268016979274481,Competitor
+Ford,Isuzu,288,5.4678645329573055,Competitor
+Ford,NHK Spring,61,3.432408355505487,Collaborator
+Ford,Nissan,5349,13.136563799357674,Competitor
+Ford,Peugeot,1427,8.837454522521941,Competitor
+Ford,Renault,1236,8.464582481114899,Competitor
+Ford,SAIC,141,4.41332320594846,Competitor
+Ford,Suzuki,599,6.811269224912828,Competitor
+Ford,Tata,577,6.735234854151509,Competitor
+Ford,Tesla,531,6.569440088225624,Competitor
+Ford,Volkswagen,4524,12.49271346035393,Competitor
+Ford,Yamaha Motor Corporation,67,3.5303880208226968,Competitor
+Geely,Audi,27,2.6878753795222865,Competitor
+Geely,FCA,37,2.954340289925338,Competitor
+Geely,Shell,0,0.0,Collaborator
+Geely,Suzuki,3,1.3903891703159093,Competitor
+Geely,Tata,48,3.194275505495155,Competitor
+General Motor,Audi,963,7.853945551419685,Competitor
+General Motor,Bosch,31,2.8016153494371836,Collaborator
+General Motor,FCA,2895,10.9268396628969,Competitor
+General Motor,Geely,180,4.748776734338052,Competitor
+General Motor,Mitsubishi Electric,83,3.7646397861257266,Collaborator
+General Motor,Mold Masters,31,2.8016153494371836,Collaborator
+General Motor,NGK Spark Plug,31,2.8016153494371836,Collaborator
+General Motor,Peugeot,2088,9.90647500938525,Competitor
+General Motor,Renault,1197,8.383555526381897,Competitor
+General Motor,SAIC,427,6.15358724702344,Collaborator
+General Motor,Suzuki,430,6.166525569953239,Competitor
+General Motor,Tata,695,7.121892948696807,Competitor
+Honda,Audi,687,7.0971996281025955,Competitor
+Honda,FCA,1149,8.281252154517615,Competitor
+Honda,Geely,83,3.7646397861257266,Competitor
+Honda,General Motor,4235,12.247741861060947,Collaborator
+Honda,Hyundai,2034,9.828908329257013,Competitor
+Honda,Isuzu,150,4.496011130479918,Collaborator
+Honda,Mitsubishi Motor,275,5.392619876708788,Competitor
+Honda,Nissan,5398,13.172550252815595,Competitor
+Honda,Peugeot,536,6.587936992707819,Competitor
+Honda,Renault,662,7.018711588426945,Competitor
+Honda,SAIC,78,3.695118587779747,Competitor
+Honda,Suzuki,982,7.900115601809375,Competitor
+Honda,Tata,324,5.664525067769412,Competitor
+Honda,Tesla,170,4.668041156493941,Competitor
+Honda,Volkswagen,2881,10.910960347887553,Competitor
+Honda,Yamaha Motor Corporation,131,4.316993439835684,Competitor
+Hyundai,Audi,341,5.752098490995029,Competitor
+Hyundai,FCA,754,7.298126784789853,Competitor
+Hyundai,Geely,12,2.107435899344471,Competitor
+Hyundai,General Motor,1932,9.678368119995477,Competitor
+Hyundai,Mazda,436,6.192213855046329,Competitor
+Hyundai,Peugeot,584,6.7596444657544845,Competitor
+Hyundai,Renault,559,6.671500798886764,Competitor
+Hyundai,SAIC,54,3.3091627572662095,Competitor
+Hyundai,Suzuki,314,5.6114990589420035,Competitor
+Hyundai,Tata,311,5.595361067573949,Competitor
+Hyundai,Yamaha Motor Corporation,6,1.711769859409705,Competitor
+Isuzu,Cummins,27,2.6878753795222865,Competitor
+Isuzu,Navistar,48,3.194275505495155,Competitor
+Isuzu,Oshkosh,7,1.792789962520997,Competitor
+Isuzu,Paccar,40,3.0242521453322184,Competitor
+Isuzu,Scania,3,1.3903891703159093,Competitor
+JTEKT,Hoover Precision Products,0,0.0,Competitor
+JTEKT,Minebea,12,2.107435899344471,Competitor
+JTEKT,NSK,29,2.7461192933624785,Competitor
+JTEKT,NTN,0,0.0,Competitor
+JTEKT,Nbc Bearings,0,0.0,Competitor
+JTEKT,SKF,0,0.0,Competitor
+JTEKT,Schaeffler,1,1.0,Competitor
+JTEKT,TimKen,12,2.107435899344471,Competitor
+Nissan,Audi,575,6.728222630300609,Competitor
+Nissan,Geely,87,3.818174525886768,Competitor
+Nissan,General Motor,3716,11.776675584870901,Competitor
+Nissan,Hyundai,1873,9.588735371815519,Competitor
+Nissan,Mitsubishi Motor,271,5.368967650924707,Competitor
+Nissan,Peugeot,768,7.338518037139213,Competitor
+Nissan,Renault,1724,9.353220620367956,Collaborator
+Nissan,SAIC,101,3.9929733546852777,Competitor
+Nissan,Suzuki,706,7.155523466351744,Competitor
+Nissan,Tesla,401,6.0386980144698,Competitor
+Nissan,Volkswagen,2893,10.92457448512156,Competitor
+Nissan,Yamaha Motor Corporation,41,3.046738334899583,Competitor
+Panasonic,BenQ,4,1.515716566510398,Competitor
+Panasonic,Dell,3,1.3903891703159093,Competitor
+Panasonic,HTC,360,5.846429946702608,Competitor
+Panasonic,HUAWEI,3,1.3903891703159093,Competitor
+Panasonic,Microsoft,953,7.829388979204495,Competitor
+Panasonic,Nikon,432,6.175116053788563,Competitor
+Panasonic,OSRAM,3,1.3903891703159093,Competitor
+Panasonic,Philips,446,6.234483180286311,Competitor
+Panasonic,Samsung,3959,12.002608775656242,Competitor
+Panasonic,Sony,4718,12.651073560183999,Competitor
+Peugeot,FCA,1447,8.874431864008676,Competitor
+Peugeot,Mitsubishi Motor,83,3.7646397861257266,Collaborator
+Renault,Suzuki,182,4.764544816607805,Competitor
+Renault,Tata,104,4.028190508306193,Competitor
+SAIC,Geely,58,3.380869426401905,Competitor
+SAIC,Mazda,41,3.046738334899583,Competitor
+Suzuki,FCA,289,5.473553316918489,Competitor
+Suzuki,Mitsubishi Motor,76,3.6664357397762077,Competitor
+Suzuki,Tata,189,4.818796000914871,Competitor
+Tesla,Brembo,6,1.711769859409705,Collaborator
+Tesla,General Motor,546,6.624571514496292,Competitor
+Tesla,Hyundai,50,3.233635032886787,Competitor
+Tesla,Inteva Products,6,1.711769859409705,Collaborator
+Tesla,Kandi Technologies,20,2.4564560522315806,Competitor
+Tesla,Kia,32,2.82842712474619,Competitor
+Tesla,Modine Manufacturing,7,1.792789962520997,Collaborator
+Tesla,Navistar,10,1.9952623149688795,Competitor
+Tesla,Oshkosh,14,2.2071833466585673,Competitor
+Tesla,Paccar,7,1.792789962520997,Competitor
+Tesla,Panasonic,32,2.82842712474619,Collaborator
+Tesla,Sika,6,1.711769859409705,Collaborator
+Tesla,Spartan,6,1.711769859409705,Competitor
+Tesla,Stabilus,6,1.711769859409705,Collaborator
+Tesla,Tata,40,3.0242521453322184,Competitor
+Tesla,Volkswagen,82,3.750974879935414,Competitor
+Tesla,Wabco,6,1.711769859409705,Competitor
+Tesla,ZF Lenksysteme,6,1.711769859409705,Collaborator
+Toyoda Gosei,Bosch,0,0.0,Competitor
+Toyoda Gosei,Delphi,1,1.0,Competitor
+Toyoda Gosei,Honeywell,5,1.6206565966927624,Competitor
+Toyoda Gosei,Johnson Controls,0,0.0,Competitor
+Toyoda Gosei,Lear,6,1.711769859409705,Competitor
+Toyoda Gosei,Magneti Marelli,0,0.0,Competitor
+Toyoda Gosei,Takata,0,0.0,Competitor
+Toyoda Gosei,Valeo,0,0.0,Competitor
+Toyoda Gosei,ZF TRW,0,0.0,Competitor
+Toyota,Aisin Seiki,44,3.1119728754884552,Collaborator
+Toyota,Audi,1089,8.14907592085283,Competitor
+Toyota,BMW,3646,11.709679255337294,Competitor
+Toyota,DENSO,275,5.392619876708788,Collaborator
+Toyota,Daimler,1197,8.383555526381897,Competitor
+Toyota,Ford,8425,15.054660733864615,Competitor
+Toyota,Geely,107,4.062703547247622,Competitor
+Toyota,General Motor,6404,13.865495587870672,Competitor
+Toyota,Honda,8517,15.103791930831333,Competitor
+Toyota,Hyundai,2484,10.43627411183484,Competitor
+Toyota,Isuzu,299,5.529697276636929,Collaborator
+Toyota,JTEKT,24,2.594557933960465,Collaborator
+Toyota,Nissan,7298,14.419863778394722,Competitor
+Toyota,Panasonic,1185,8.358252850417093,Collaborator
+Toyota,Peugeot,1124,8.226780185306504,Competitor
+Toyota,Renault,1020,7.990612154170351,Competitor
+Toyota,SAIC,117,4.173070853258721,Competitor
+Toyota,Suzuki,886,7.660023756983167,Collaborator
+Toyota,Tesla,587,6.7700430507310205,Competitor
+Toyota,Toyoda Gosei,25,2.626527804403767,Collaborator
+Toyota,Toyota Boshoku,28,2.717361446466631,Collaborator
+Toyota,Toyota Industries,36,2.930156051583521,Collaborator
+Toyota,Toyota Tsusho,72,3.6074452531358507,Collaborator
+Toyota,Volkswagen,4356,12.351689374987613,Competitor
+Toyota,Yamaha Motor Corporation,99,3.9690864506808694,Competitor
+Toyota Boshoku,Adient,0,0.0,Competitor
+Toyota Boshoku,Benteler,0,0.0,Competitor
+Toyota Boshoku,Faurecia,5,1.6206565966927624,Competitor
+Toyota Boshoku,Grupo Antolin,0,0.0,Competitor
+Toyota Boshoku,Honeywell,5,1.6206565966927624,Competitor
+Toyota Boshoku,Johnson Controls,5,1.6206565966927624,Competitor
+Toyota Boshoku,Lear,11,2.053136413658844,Competitor
+Toyota Boshoku,Magna,0,0.0,Competitor
+Toyota Boshoku,SRG Global,0,0.0,Competitor
+Toyota Boshoku,Siemens,19,2.4189454814875875,Competitor
+Toyota Industries,DENSO,8,1.8660659830736148,Collaborator
+Toyota Industries,Engliftsystems,0,0.0,Competitor
+Toyota Industries,Godrej Consumer Products,0,0.0,Competitor
+Toyota Industries,Kion Group,0,0.0,Competitor
+Toyota Industries,L'Oreal,0,0.0,Competitor
+Toyota Industries,Mazda,4,1.515716566510398,Collaborator
+Toyota Industries,P&G,8,1.8660659830736148,Competitor
+Toyota Industries,S.C. Johnson,0,0.0,Competitor
+Toyota Industries,Sisscohoist,0,0.0,Competitor
+Toyota Industries,Unilever,0,0.0,Competitor
+Toyota Industries,Whiting,0,0.0,Competitor
+Toyota Tsusho,CFAO,0,0.0,Collaborator
+Toyota Tsusho,ITOCHU,12,2.107435899344471,Competitor
+Toyota Tsusho,Marubeni,14,2.2071833466585673,Competitor
+Toyota Tsusho,Mitsubishi Corp,74,3.6372195430613803,Competitor
+Toyota Tsusho,Sumitomo,5,1.6206565966927624,Competitor
+Volkswagen,Audi,1598,9.142669749061096,Collaborator
+Volkswagen,Geely,91,3.8700129448363705,Competitor
+Volkswagen,General Motor,4544,12.509256473251348,Competitor
+Volkswagen,Hyundai,1814,9.497103802223686,Competitor
+Volkswagen,Isuzu,98,3.9570161493329823,Competitor
+Volkswagen,Kia,1365,8.720468053022428,Competitor
+Volkswagen,Microsoft,316,5.622197850610044,Collaborator
+Volkswagen,Peugeot,1804,9.481367056918364,Competitor
+Volkswagen,Porsche,2112,9.940498729938096,Collaborator
+Volkswagen,Renault,1409,8.803863450185995,Competitor
+Volkswagen,SAIC,195,4.864188351857917,Competitor
+Volkswagen,Subaru,25,2.626527804403767,Competitor
+Volkswagen,Suzuki,362,5.856155109274521,Competitor
+Volkswagen,Tata,339,5.741956651022271,Competitor
+Volkswagen,Yamaha Motor Corporation,29,2.7461192933624785,Competitor
+Yamaha Motor Corporation,Bajaj Auto,7,1.792789962520997,Competitor
+Yamaha Motor Corporation,Hero Motor,28,2.717361446466631,Competitor
+Yamaha Motor Corporation,NVIDIA,6,1.711769859409705,Collaborator
+Yamaha Motor Corporation,Suzuki,52,3.2719073933511478,Competitor
+Yamaha Motor Corporation,TVS,5,1.6206565966927624,Competitor
