@@ -666,7 +666,7 @@ def update_cds_mcgg():
         dd = [dt.datetime.strptime(d, '%Y-%m-%d') for d in cds_mcgg.data['Date']]
         cds_mcgg.data['Date'] = np.array([dt.datetime.date(d) for d in dd])
 
-def create_figure_mcgg(cds_main_mcgg,cds_label_optim,cds_label_pessi):
+def create_figure_mcgg(cds_main_mcgg,cds_label_optim,cds_label_pessi,selected):
 
     kw = {}
 
@@ -755,6 +755,7 @@ index_radiogroup_mcgg = RadioGroup(
                 'S&P 500',
                 'Nikkei 225',
                 'None'],
+                active = 5, 
                 width=300,
                 height=110)
 
