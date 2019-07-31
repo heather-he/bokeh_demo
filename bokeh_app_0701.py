@@ -1,4 +1,4 @@
-{}# import pacakges
+# import pacakges
 import networkx as nx
 
 import pandas as pd
@@ -175,30 +175,7 @@ df_edges = pd.DataFrame.from_dict(dict_edgess, orient= 'columns')
 
 G = nx.convert_matrix.from_pandas_edgelist(df_edges,source='start',target='stop',edge_attr=True )
 
-# add attributes (coms/cols to nodes)
-node_attr = {}
-for u in list(G.nodes()):
-    com_str = ''
-    col_str = ''
-    mkt_cap = round(df_mktcap[df_mktcap.Company == u]['MktCapMilUSD']/1000,2)
-    size = math.pow(mkt_cap*10,0.5)
-    for v in list(G.neighbors(u)):
-        if G.edges[u, v]['level'] == 'com':
-            if com_str == '':
-                com_str = v
-            else:
-                com_str = com_str+', '+v
-        else:
-            if col_str == '':
-                col_str = v
-            else:
-                col_str = col_str+', '+v
-    node_attr[u] = {'competitors':com_str, 'collaborators': col_str,'marketcap':mkt_cap,'size':size}
-
-nx.set_node_attributes(G,node_attr)
-
 # add pre-processed attr to edges
-
 edge_attr = {('Toyota', 'Daimler'): {'link': 1197.0, 'width': 8.383555526381897},
  ('Toyota', 'BMW'): {'link': 3646.0, 'width': 11.709679255337296},
  ('Toyota', 'Ford'): {'link': 8425.0, 'width': 15.054660733864615},
@@ -484,6 +461,36 @@ edge_attr = {('Toyota', 'Daimler'): {'link': 1197.0, 'width': 8.383555526381897}
  ('Suzuki', 'Tata'): {'link': 189.0, 'width': 4.818796000914871}}
 nx.set_edge_attributes(G, edge_attr)
 
+# add attributes (coms/cols to nodes)
+node_attr = {}
+for u in list(G.nodes()):
+    com_str = ''
+    col_str = ''
+    mkt_cap = round(df_mktcap[df_mktcap.Company == u]['MktCapMilUSD']/1000,2)
+    size = math.pow(mkt_cap*10,0.5)
+    for v in list(G.neighbors(u)):
+
+        try:
+            v_link = v+'('+str(int(edge_attr[u,v]['link']))+')'
+        except:
+            v_link = v+'('+str(int(edge_attr[v,u]['link']))+')'
+
+        if G.edges[u, v]['level'] == 'com':
+            if com_str == '':
+                com_str = v_link
+            else:
+                com_str = com_str+', '+v_link
+        else:
+            if col_str == '':
+                col_str = v_link
+            else:
+                col_str = col_str+', '+v_link
+    node_attr[u] = {'competitors':com_str, 'collaborators': col_str,'marketcap':mkt_cap,'size':size}
+
+nx.set_node_attributes(G,node_attr)
+
+
+
 nx_renderer = from_networkx(G, nx.kamada_kawai_layout)
 
 # Convert: NetworkX node attributes -> ColumnDataSource
@@ -535,10 +542,10 @@ nx_renderer.edge_renderer.glyph = MultiLine(line_color="color", line_alpha=0.3, 
 nx_tooltips = """
 <div>
     <div>
-    <span style="font-size: 10px">Competitors:@competitors</span>
+    <span style="font-size: 10px">Competitors(Relevance):@competitors</span>
     </div>
     <div>
-    <span style="font-size: 10px">Collaborators: @collaborators</span>
+    <span style="font-size: 10px">Collaborators(Relevance): @collaborators</span>
     </div>
     <div>
     <span style="font-size: 10px">Market Capitalization (Bililion$): @marketcap</span>
@@ -755,7 +762,6 @@ index_radiogroup_mcgg = RadioGroup(
                 'S&P 500',
                 'Nikkei 225',
                 'None'],
-                active = 5, 
                 width=300,
                 height=110)
 
