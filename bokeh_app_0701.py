@@ -943,6 +943,18 @@ pre_all = Div(text='''
 <p>
 <h1>Construct Geolocation Risk-factor Indicators with News Sentiment</h1>
 </p>
+
+<p>
+<h2>Developed by He He (h.he@soton.ac.uk) & Dr Tiejun Ma </h1>
+</p>
+<p>
+<h2>University of Southampton </h1>
+</p>
+
+<p>
+Last updated: July 2019
+</p>
+
 <p>
 <b>
 In this page, a method to construct geo-risk factor indicators (GRIs) by using publicly available information – news is presented. GRIs can capture various risk types in different regions faced by individual companies comprehensively. GRIs can be employed by companies to measure their own risk exposures and to support the business operational and strategical decision-making, or be adopted by other stakeholders to capture the risks faced by the company and make predictions about the company’s performance in the market and communities.
