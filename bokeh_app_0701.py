@@ -945,10 +945,10 @@ pre_all = Div(text='''
 </p>
 
 <p>
-<h2>Developed by He He (h.he@soton.ac.uk) & Dr Tiejun Ma </h1>
+Developed by He He (h.he@soton.ac.uk) & Dr Tiejun Ma 
 </p>
 <p>
-<h2>University of Southampton </h1>
+University of Southampton
 </p>
 
 <p>
